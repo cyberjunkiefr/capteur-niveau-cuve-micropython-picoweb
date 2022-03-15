@@ -26,13 +26,13 @@ dimension_cuve_Y = 5.68;  # taille de la cuve en Y en m
 surface_cuve = dimension_cuve_X * dimension_cuve_Y;
 volume_max_cuve = round(surface_cuve * hauteur_max_eau, 2)
 
-wificonnect.connectSTA(ssid='PAROLA_WIFI', password='LilieLuluKelia25')
+wificonnect.connectSTA(ssid='<your_ssid>', password='<your_passeword>')
 
 
 def calcul_volume():
-    sensor = 1#HCSR04(trigger_pin=22, echo_pin=21)
+    sensor = HCSR04(trigger_pin=22, echo_pin=21)
     try:
-        distance = sensor#.distance_cm() / 100 # distance en m
+        distance = sensor.distance_cm() / 100 # distance en m
         volume_eau=round(((hauteur_max_eau + position_capteur) * surface_cuve) - (distance * surface_cuve), 2)
         print("Distance: ", distance, " m\nVolume d'eau: ", volume_eau, " m3")
         return volume_eau
