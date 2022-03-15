@@ -1,0 +1,6 @@
+__pycache__/
+venv
+.idea
+pymakr.conf
+git status
+pymakr.conf

@@ -1,0 +1,17 @@
+* {
+  overflow: auto;
+}
+
+body {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 35%), rgba(0, 0, 0, 35%)), url("eau.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-color: rgb(54, 98, 139);
+  margin: 0px;
+  font-family: Arial;
+  font-size: 16px;
+  overflow: visible;
+  color:rgb(255, 199, 109);
+}

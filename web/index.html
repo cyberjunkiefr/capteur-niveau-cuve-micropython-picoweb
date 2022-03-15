@@ -1,0 +1,46 @@
+<!doctype html>
+<html  lang='fr'>
+  <head>
+      <script type="text/javascript">
+      src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+      type="text/javascript">
+      $(document).ready(function() {
+
+          update_volume();
+
+          function update_volume() {
+              $.ajax({
+                      url: '/get_volume',
+                      dataType: 'json'
+                  })
+                  .done(function(data) {
+                      console.log(data);
+                      $('#volume').html(data.volume);
+                      setTimeout(update_volume, 1000);
+                  });
+          }
+      });
+    </script>
+    
+    
+    <meta charset='UTF-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Capteur niveau eau</title>
+    <link rel="stylesheet" href="style.css">
+
+  </head>
+
+  <body>
+
+    <h1>Capteur niveau eau, ESP32 + HCSR04</h1>
+
+    <div>
+      <body>
+        <div>
+        <p>Volume d'eau restant dans la cuve : </p>
+        </div>
+        <div class="volume_eau" id="volume">
+            00.0 <span>m3</span>
+        </div>
+    </div>
