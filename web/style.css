@@ -3,7 +3,7 @@
 }
 
 body {
-  background: linear-gradient(0deg, rgba(0, 0, 0, 35%), rgba(0, 0, 0, 35%)), url("eau.jpg") no-repeat center center fixed;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 35%), rgba(0, 0, 0, 35%)), url('eau.jpg') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -14,4 +14,15 @@ body {
   font-size: 16px;
   overflow: visible;
   color:rgb(255, 199, 109);
+}
+
+.centre {
+    text-align: center;
+    width: 100%;
+}
+
+.table {
+    width: 50%;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 60px;
 }

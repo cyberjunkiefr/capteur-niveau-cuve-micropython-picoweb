@@ -1,9 +1,10 @@
 <!doctype html>
 <html  lang='fr'>
   <head>
-      <script type="text/javascript">
-      src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"
-      type="text/javascript">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript">
+    </script>
+      
+    <script type="text/javascript">
       $(document).ready(function() {
 
           update_volume();
@@ -22,7 +23,6 @@
       });
     </script>
     
-    
     <meta charset='UTF-8'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
@@ -32,15 +32,19 @@
   </head>
 
   <body>
+    <img src=images/fondecran.jpg id=fondecran alt=>
 
-    <h1>Capteur niveau eau, ESP32 + HCSR04</h1>
-
+    <h1 class="centre">Capteur niveau eau, ESP32 + HCSR04</h1>
     <div>
       <body>
         <div>
         <p>Volume d'eau restant dans la cuve : </p>
         </div>
-        <div class="volume_eau" id="volume">
-            00.0 <span>m3</span>
-        </div>
+        
+        <table class="centre table">
+            <tr>
+                <th id="volume">0.00</th>
+                <th>m3</th>
+            </tr>
+        </table>
     </div>
