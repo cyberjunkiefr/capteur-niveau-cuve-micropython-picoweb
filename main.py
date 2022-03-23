@@ -18,11 +18,11 @@ dimension_cuve_Y = 5.68;  # Y size of the tank / taille de la cuve en Y en m
 
 
 # definition pin module
-led_bleu = Pin(27, Pin.OUT, 1)
+led_bleu = Pin(27, Pin.OUT, 0)
 led_verte1 = Pin(26, Pin.OUT, 0)
-led_verte2 = Pin(25, Pin.OUT, 1)
+led_verte2 = Pin(25, Pin.OUT, 0)
 led_jaune1 = Pin(33, Pin.OUT, 0)
-led_jaune2 = Pin(32, Pin.OUT, 1)
+led_jaune2 = Pin(32, Pin.OUT, 0)
 led_rouge = Pin(12, Pin.OUT, 0)
 buzzer = Pin(15, Pin.OUT, 0)
 
@@ -68,6 +68,7 @@ def calcul_volume():
 def affichage():
     led_init()
     tft.sleep_mode(0)
+    tft.init()
     global volume_disponible
     volume_disponible = calcul_volume()
     if volume_max_cuve > volume_disponible > 0:
@@ -103,8 +104,8 @@ def affichage_digital():
 
 
 def error():
-    tft.init()
     tft.sleep_mode(0)
+    tft.init()
     tft.text(vga1_bold_16x32, "MESURE", 80, tft.height() // 3 - vga1_bold_16x32.HEIGHT//2, st7789.RED, st7789.BLACK)
     text = "ERRONEE"
     length=len(text)
@@ -113,9 +114,12 @@ def error():
  
 def handleInterrupt(timer):
     affichage()
-    #timer.init(period=300000, mode=Timer.ONE_SHOT, callback=handleInterrupt)
 
- 
+tft.init()
+tft.fill(st7789.GREEN)
+tft.text(vga1_bold_16x32, "BIENVENUE", 40, tft.height() // 3 - vga1_bold_16x32.HEIGHT//2, st7789.MAGENTA, st7789.GREEN)
+tft.text(vga1_bold_16x32, "Attendez 20s", 25, 2*(tft.height() // 3) - vga1_bold_16x32.HEIGHT//2, st7789.MAGENTA, st7789.GREEN)
+
 # ---- Routing Picoweb ------------------------------------ 
 app = picoweb.WebApp(__name__)
 @app.route("/")
@@ -137,12 +141,12 @@ def css(req, resp):
     yield from app.sendfile(resp, '/web/style.css')
 
 
-@app.route("/eau.jpg")
+@app.route("/goutte_eau.jpg")
 def image(req, resp):
     print("Download JPG")
     yield from picoweb.start_response(resp)
     try:
-        with open("/web/eau.jpg", 'rb') as img_binary:
+        with open("web/goutte_eau.jpg", 'rb') as img_binary:
             img= img_binary.read()
         yield from resp.awrite(img)
     except Exception:
@@ -150,6 +154,5 @@ def image(req, resp):
         pass
     
 
-timer.init(period=10000, mode=Timer.PERIODIC, callback=handleInterrupt)
-#timer.init(period=10000, mode=Timer.ONE_SHOT, callback=handleInterrupt)
+timer.init(period=20000, mode=Timer.PERIODIC, callback=handleInterrupt)
 app.run(debug=True, host = ipaddress, port = 80)

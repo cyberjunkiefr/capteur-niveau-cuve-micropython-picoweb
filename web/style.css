@@ -1,22 +1,16 @@
-* {
-  overflow: auto;
-}
-
-body {
-  background: linear-gradient(0deg, rgba(0, 0, 0, 35%), rgba(0, 0, 0, 35%)), url('eau.jpg') no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  margin: 50px;
-  font-family: Arial;
-  font-size: 30px;
-  overflow: visible;
-  color:rgb(255, 199, 109);
+.contenu {
+  min-width: 335px;
+  box-shadow: 0px 0px 20px 8px #23272cc0;
+  margin-top: 100px;
+  margin-bottom: 100px;
 }
 
 h2 {
-  font-size: 30px;
+  font-size: 12px;
+}
+
+h1 {
+  font-size: 60px;
 }
 
 .centre {
@@ -37,18 +31,21 @@ th {
   font-size: 80px;
 }
 
-div.tableau {  
-  background-color: rgba(78,176,213, 20%);
+div.tableau {
+  font-size: 50px;
   position: relative;
   text-align: center;
-  width: 100%;
+  width: 90%;
   color: rgb(255, 199, 109);
-  margin: 0px 20px 0px 20px;
-  box-shadow: 0px 0px 20px 8px #23272cc0;
+  margin: 0px 20px 30px 20px;
   display: inline-block;
   font-weight: bold;
   overflow: visible;
   padding: 0px 2px 0px 2px;
   height: max-content;
+}
+
+p {
+  margin: 0px;
 }
 

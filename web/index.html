@@ -31,23 +31,40 @@
 
   </head>
 
-  <body>
+  <body style="
+  background: linear-gradient(0deg, rgba(0, 0, 0, 60%), rgba(0, 0, 0, 60%)), url('https://www.communaute.paysdechateaugiron.bzh/medias/2020/07/eau-potable.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  margin: 50px;
+  font-family: Arial;
+  font-size: 0px;
+  overflow: visible;
+  color:rgb(255, 199, 109);
+">
 
-    <h1 class="centre">Capteur niveau eau</h1>
-    <h2 class="centre">ESP32 + HCSR04</h2>
-    
-    <div class="tableau">
-      <div>
-      <p>Volume d'eau restant dans la cuve : </p>
-    </div>
+
+    <div class="contenu">
+
+      <h1 class="centre">Niveau d'eau dans la cuve</h1>
       
-      <div>
-        <table class="centre">
-            <tr>
-                <th class="volume" id="volume">0.00</th>
-                <th class="m3">m3</th>
-            </tr>
-        </table>
+      <div class="tableau">
+        <div>
+        <p>Volume restant :</p>
+        </div>
+        
+        <div>
+          <table class="centre">
+              <tr>
+                  <th class="volume" id="volume">0.00</th>
+                  <th class="m3">m3</th>
+              </tr>
+          </table>
+        </div>
       </div>
+      <h2 class="centre">capteur HCSR04 - Programmation python sur module ESP32 TTGO T-Display</h2>
+      <h2 class="centre">Développeur : Parola François</h2>
+    </div>
   </body>
 </html>
