@@ -4,6 +4,7 @@ import time, utime, wificonnect
 import tft_config, st7789 #lib tft pour affichage sur ttgo t-display
 import picoweb #affichage de la page web, ajouter utemplate, pgk_ressources et ulogging aux lib
 import vga1_bold_16x32, vga2_16x16 # font
+import sys, gc
 
 
 # ------------------------------------------ TANK SIZE -------------------------------------------------------------------------
@@ -28,6 +29,7 @@ led_jaune2 = PWM(Pin(32, Pin.OUT, 0), frequence_led)
 led_rouge = PWM(Pin(12, Pin.OUT, 0), frequence_led)
 buzzer = Pin(15, Pin.OUT, 0)
 bouton = Pin(35,Pin.IN, Pin.PULL_UP)
+tfton = True
 
 # definition du display
 tft = tft_config.config()
@@ -40,7 +42,7 @@ volume_disponible = 0.00
 timer = Timer(0)
 
 # connexion au wifi
-ipaddress = wificonnect.connectSTA(ssid='PAROLA_WIFI', password='LilieLuluKelia25')
+ipaddress = wificonnect.connectSTA(ssid='Your_SSID', password='Your_Password')
 print(ipaddress)
 
 
@@ -57,8 +59,10 @@ def calcul_volume():
     data = []
     try:
         for i in range(1, 10):
-            mesure = HCSR04(trigger_pin=22, echo_pin=21)
-            distance = mesure.distance_cm() / 100
+            #mesure = HCSR04(trigger_pin=22, echo_pin=21)
+            mesure = 100
+            #distance = mesure.distance_cm() / 100
+            distance = mesure /100
             data.append(distance)
             print(distance)
             time.sleep(0.05)
@@ -126,18 +130,21 @@ def error():
     length=len(text)
     tft.text(vga1_bold_16x32, text, tft.width() // 2 - length // 2 * vga1_bold_16x32.WIDTH, 2 * tft.height() // 3 - vga1_bold_16x32.HEIGHT//2, st7789.RED, st7789.BLACK)
     
-
+def boutonpush(p):
+    global tfton
+    tfton = True
+    tft.on()
+    affichage_numerique()
+    
 def handleInterrupt(timer):
-    if bouton.value() == 1 :
-        tft.off()
-        affichage_analogique()
-        time.sleep(1)
-    else:
-        tft.on()
+    global tfton
+    if tfton :
         affichage_analogique()
         affichage_numerique()
-        time.sleep(3)
-        tft.fill(st7789.BLACK)
+        tfton=False
+    else:
+        tft.off()
+        affichage_analogique()
 
 tft.fill(st7789.GREEN)
 tft.text(vga1_bold_16x32, " POWER ON", 45, 10, st7789.RED, st7789.GREEN)
@@ -163,7 +170,20 @@ def css(req, resp):
     print("Send style.css")
     yield from picoweb.start_response(resp)
     yield from app.sendfile(resp, '/web/style.css')
-    
 
+@app.route("/goutte_eau.jpg")
+def image(req, resp):
+    print("Download JPG")
+    yield from picoweb.start_response(resp)
+    gc.collect()
+    try:
+        with open("web/goutte_eau.jpg", 'rb') as f:
+            img = f.read()
+        yield from resp.awrite(img)
+    except Exception as e:
+        sys.print_exception(e)
+        print("Image file not found.")
+        pass
+bouton.irq(trigger=Pin.IRQ_FALLING, handler=boutonpush) 
 timer.init(period=3000, mode=Timer.PERIODIC, callback=handleInterrupt)
 app.run(debug=True, host = ipaddress, port = 80)
