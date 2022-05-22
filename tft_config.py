@@ -6,7 +6,7 @@ import st7789
 TFA = 40
 BFA = 40
 
-def config(rotation=0, buffer_size=0, options=0):
+def config(rotation=1, buffer_size=0, options=0):
     return st7789.ST7789(
         SPI(1, baudrate=30000000, sck=Pin(18), mosi=Pin(19)),
         135,
