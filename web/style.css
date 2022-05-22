@@ -5,6 +5,19 @@
   margin-bottom: 100px;
 }
 
+body {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 40%), rgba(0, 0, 0, 40%)), url("goutte_eau.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  margin: 50px;
+  font-family: Arial;
+  font-size: 0px;
+  overflow: visible;
+  color:rgb(255, 199, 109);
+}
+
 h2 {
   font-size: 12px;
 }
