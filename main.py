@@ -59,10 +59,8 @@ def calcul_volume():
     data = []
     try:
         for i in range(1, 10):
-            #mesure = HCSR04(trigger_pin=22, echo_pin=21)
-            mesure = 100
-            #distance = mesure.distance_cm() / 100
-            distance = mesure /100
+            mesure = HCSR04(trigger_pin=22, echo_pin=21)
+            distance = mesure.distance_cm() / 100
             data.append(distance)
             print(distance)
             time.sleep(0.05)
